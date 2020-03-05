@@ -6,12 +6,11 @@ function FirebaseAdminNode(config) {
   }
 
   this.app = firebaseAdmin.initializeApp({
-	  credential: firebaseAdmin.credential.cert(config.serviceAccountJson),
-	  databaseURL: `https://${config.serviceAccountJson.project_id}.firebaseio.com`
+	  credential: firebaseAdmin.credential.cert(config.serviceAccountJson)
 	});
 
 	this._firebaseAdmin = firebaseAdmin;
-	this.database = firebaseAdmin.database();
+	this.messaging = firebaseAdmin.messaging();
 }
 
 FirebaseAdminNode.prototype.onClose = function(removed, done) {

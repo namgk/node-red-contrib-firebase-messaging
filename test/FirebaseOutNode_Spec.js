@@ -23,17 +23,20 @@ describe('FirebaseOutNode', function() {
       admin: firebaseAdminNode
     });
 
-    const topic = "kioskId == 1"
-    const content = Math.floor(Math.random() * 100);
+    const topic = "atopic"
+    const title = "atitle"
+    const content = "acontent";
 
     firebaseOutNode.onInput({
-      payload: content,
+      payload: { title, "body": content },
       topic
     }, d => {
-      assert(d.payload === content);
+      assert(d.payload.title === title);
+      assert(d.payload.body === content);
       assert(d.topic === topic);
       firebaseAdminNode.onClose(null, done);
     }, e => {
+      console.log(e);
       firebaseAdminNode.onClose(null, ()=>{done(1)});
     });
   });

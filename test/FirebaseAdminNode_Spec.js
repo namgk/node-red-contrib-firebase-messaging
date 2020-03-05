@@ -13,10 +13,12 @@ describe('FirebaseAdminNode', function() {
     });
 
     assert.notEqual(firebaseAdminNode._firebaseAdmin, null);
+    assert.notEqual(firebaseAdminNode.messaging, null);
 
     firebaseAdminNode._firebaseAdmin.app().INTERNAL.getToken()
       .then((d)=>{
         expect(d).to.have.keys(['accessToken', 'expirationTime']);
+        console.log(firebaseAdminNode)
         // clean up
         let deletePromises = [];
         firebaseAdminNode._firebaseAdmin.apps.forEach((app) => {

@@ -25,7 +25,6 @@
   },
   "node-red": {
     "nodes": {
-      "firebaseIn": "src/firebaseIn.js",
       "firebaseOut": "src/firebaseOut.js",
       "firebaseAdmin": "src/firebaseAdmin.js"
     }
