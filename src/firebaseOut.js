@@ -25,7 +25,7 @@ module.exports = function(RED) {
     })
   }
 
-  RED.nodes.registerType("firebase out", FirebaseOut);
+  RED.nodes.registerType("firebase cloud messaging", FirebaseOut);
 }
 
 
