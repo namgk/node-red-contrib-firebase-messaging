@@ -4,24 +4,26 @@ function FirebaseOutNode(config) {
   }
 
   this.messaging = config.admin.messaging;
+  this.type = config.type === "notification" ? "notification" : "data";
 	this.onStatus = ()=>{}
 }
 
-FirebaseOutNode.prototype.onInput = function(msg, out, errorcb) {
+FirebaseOutNode.prototype.onInput = function(msg, out) {
   // send msg, on ok call out, error call errorcb
   const { topic, payload } = msg;
-  const { title, body } = payload;
+  const message = {};
+  message[this.type] = payload;
 
-  this.messaging.sendToTopic(topic, {"notification": {"title":title,"body":body}})
+  this.messaging.sendToTopic(topic, message)
   .then((response) => {
     if (response.messageId){
       out(msg);
     } else {
-      errorcb('MessageId not returned')
+      out({'payload': 'MessageId not returned'})
     }
   })
   .catch((error) => {
-    errorcb(error);
+    out({'payload': 'MessageId not returned'})
   });
 };
 

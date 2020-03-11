@@ -21,7 +21,7 @@ module.exports = function(RED) {
     firebaseOutNode.setStatusCallback(node.status.bind(node))
 
     node.on('input', msg => {
-      firebaseOutNode.onInput(msg, node.send.bind(node), node.error.bind(node))
+      firebaseOutNode.onInput(msg, node.send.bind(node))
     })
   }
 

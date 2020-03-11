@@ -24,20 +24,80 @@ describe('FirebaseOutNode', function() {
     });
 
     const topic = "atopic"
-    const title = "atitle"
-    const content = "acontent";
+    const key1 = "atitle"
+    const key2 = "acontent";
 
     firebaseOutNode.onInput({
-      payload: { title, "body": content },
+      payload: { key1, key2 },
       topic
     }, d => {
-      assert(d.payload.title === title);
-      assert(d.payload.body === content);
+      assert(d.payload.key1 === key1);
+      assert(d.payload.key2 === key2);
       assert(d.topic === topic);
       firebaseAdminNode.onClose(null, done);
-    }, e => {
-      console.log(e);
-      firebaseAdminNode.onClose(null, ()=>{done(1)});
+    });
+  });
+
+  it('Output properly on failed case: string payload', function(done) {
+    this.timeout(3000);
+
+    const firebaseAdminNode = new FirebaseAdminNode({
+      serviceAccountJson: serviceAccountJson
+    });
+
+    const firebaseOutNode = new FirebaseOutNode({
+      admin: firebaseAdminNode
+    });
+
+    firebaseOutNode.onInput({
+      payload: "a string",
+      topic: "atopic"
+    }, d => {
+      assert(d.payload === 'MessageId not returned');
+      assert(d.topic === undefined);
+      firebaseAdminNode.onClose(null, done);
+    });
+  });
+
+  it('Output properly on failed case: array payload', function(done) {
+    this.timeout(3000);
+
+    const firebaseAdminNode = new FirebaseAdminNode({
+      serviceAccountJson: serviceAccountJson
+    });
+
+    const firebaseOutNode = new FirebaseOutNode({
+      admin: firebaseAdminNode
+    });
+
+    firebaseOutNode.onInput({
+      payload: ["a string"],
+      topic: "atopic"
+    }, d => {
+      assert(d.payload === 'MessageId not returned');
+      assert(d.topic === undefined);
+      firebaseAdminNode.onClose(null, done);
+    });
+  });
+
+  it('Output properly on failed case: empty object payload', function(done) {
+    this.timeout(3000);
+
+    const firebaseAdminNode = new FirebaseAdminNode({
+      serviceAccountJson: serviceAccountJson
+    });
+
+    const firebaseOutNode = new FirebaseOutNode({
+      admin: firebaseAdminNode
+    });
+
+    firebaseOutNode.onInput({
+      payload: {},
+      topic: "atopic"
+    }, d => {
+      assert(d.payload === 'MessageId not returned');
+      assert(d.topic === undefined);
+      firebaseAdminNode.onClose(null, done);
     });
   });
 });
