@@ -4,7 +4,7 @@ function FirebaseOutNode(config) {
   }
 
   this.messaging = config.admin.messaging;
-  this.type = config.type === "notification" ? "notification" : "data";
+  this.kind = config.kind === "notification" ? "notification" : "data";
 	this.onStatus = ()=>{}
 }
 
@@ -12,7 +12,7 @@ FirebaseOutNode.prototype.onInput = function(msg, out) {
   // send msg, on ok call out, error call errorcb
   const { topic, payload } = msg;
   const message = {};
-  message[this.type] = payload;
+  message[this.kind] = payload;
 
   this.messaging.sendToTopic(topic, message)
   .then((response) => {

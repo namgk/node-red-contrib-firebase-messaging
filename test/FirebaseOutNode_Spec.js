@@ -12,7 +12,7 @@ describe('FirebaseOutNode', function() {
   	} catch (e){}
   });
 
-  it('Can send cloud messaging', function(done) {
+  it('Can send data cloud messaging', function(done) {
     this.timeout(3000);
 
     const firebaseAdminNode = new FirebaseAdminNode({
@@ -20,7 +20,35 @@ describe('FirebaseOutNode', function() {
     });
 
     const firebaseOutNode = new FirebaseOutNode({
-      admin: firebaseAdminNode
+      admin: firebaseAdminNode,
+      kind: "data"
+    });
+
+    const topic = "atopic"
+    const key1 = "atitle"
+    const key2 = "acontent";
+
+    firebaseOutNode.onInput({
+      payload: { key1, key2 },
+      topic
+    }, d => {
+      assert(d.payload.key1 === key1);
+      assert(d.payload.key2 === key2);
+      assert(d.topic === topic);
+      firebaseAdminNode.onClose(null, done);
+    });
+  });
+
+  it('Can send notification cloud messaging', function(done) {
+    this.timeout(3000);
+
+    const firebaseAdminNode = new FirebaseAdminNode({
+      serviceAccountJson: serviceAccountJson
+    });
+
+    const firebaseOutNode = new FirebaseOutNode({
+      admin: firebaseAdminNode,
+      kind: "notification"
     });
 
     const topic = "atopic"
