@@ -56,11 +56,11 @@ describe('FirebaseOutNode', function() {
     const key2 = "acontent";
 
     firebaseOutNode.onInput({
-      payload: { key1, key2 },
+      payload: { title: key1, body: key2 },
       topic
     }, d => {
-      assert(d.payload.key1 === key1);
-      assert(d.payload.key2 === key2);
+      assert(d.payload.title === key1);
+      assert(d.payload.body === key2);
       assert(d.topic === topic);
       firebaseAdminNode.onClose(null, done);
     });

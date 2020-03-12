@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-firebase-messaging",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Communicate with google firebase realtime database. These nodes use the new firebase-admin API and service account json is used for authentication.",
   "scripts": {
     "test": "mocha"

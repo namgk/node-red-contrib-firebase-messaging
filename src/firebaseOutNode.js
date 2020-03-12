@@ -10,10 +10,14 @@ function FirebaseOutNode(config) {
 
 FirebaseOutNode.prototype.onInput = function(msg, out) {
   // send msg, on ok call out, error call errorcb
-  const { topic, payload } = msg;
+  const { topic, payload, token } = msg;
   const message = {};
   message[this.kind] = payload;
 
+  if (token){
+    message.token = token;
+  }
+  
   console.log(message);
 
   this.messaging.sendToTopic(topic, message)
