@@ -16,6 +16,7 @@ module.exports = function(RED) {
     var node = this;
 
     node.admin = RED.nodes.getNode(n.admin);
+    node.kind = n.kind === "notification" ? "notification" : "data";
 
     const firebaseOutNode = new FirebaseOutNode(node)
     firebaseOutNode.setStatusCallback(node.status.bind(node))

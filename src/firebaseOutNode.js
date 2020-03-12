@@ -14,6 +14,8 @@ FirebaseOutNode.prototype.onInput = function(msg, out) {
   const message = {};
   message[this.kind] = payload;
 
+  console.log(message);
+
   this.messaging.sendToTopic(topic, message)
   .then((response) => {
     if (response.messageId){
