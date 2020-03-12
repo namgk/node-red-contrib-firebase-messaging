@@ -5,8 +5,8 @@
       <input type="text" id="node-input-admin">
     </div>
     <div class="form-row">
-      <label for="node-input-type"><i class="fa fa-tag"></i> Message type </label>
-      <select name="type" id="node-input-type">
+      <label for="node-input-kind"><i class="fa fa-tag"></i> Message kind </label>
+      <select name="kind" id="node-input-kind">
         <option value="notification">Notification</option>
         <option value="data">Data</option>
       </select>
@@ -41,12 +41,9 @@
     defaults: {
       name: {required:false},
       admin: {type:"firebase admin",required:true},
-      type: {
+      kind: {
         required: false,
-        value: "data",
-        validate: function(val){
-          return val === 'notification' || val === 'data'
-        }
+        value: "data"
       },
     },
     color: "#FF7900",
