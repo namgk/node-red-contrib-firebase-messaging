@@ -16,11 +16,19 @@ FirebaseOutNode.prototype.onInput = function(msg, out) {
 
   if (token){
     message.token = token;
+    message.android = {
+      "ttl":"0s"
+    };
+  } else {
+    message.topic = topic;
+    message.android = {
+      "ttl":"60s"
+    };
   }
-  
+
   console.log(message);
 
-  this.messaging.sendToTopic(topic, message)
+  this.messaging.send(message)
   .then((response) => {
     if (response.messageId){
       out(msg);
