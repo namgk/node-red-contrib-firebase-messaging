@@ -17,12 +17,12 @@ FirebaseOutNode.prototype.onInput = function(msg, out) {
   if (token){
     message.token = token;
     message.android = {
-      "ttl":"0s"
+      "ttl": 0
     };
   } else {
     message.topic = topic;
     message.android = {
-      "ttl":"60s"
+      "ttl": 60000
     };
   }
 
