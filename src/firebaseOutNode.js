@@ -33,11 +33,14 @@ FirebaseOutNode.prototype.onInput = function(msg, out) {
     if (response.messageId){
       out(msg);
     } else {
-      out({'payload': 'MessageId not returned'})
+      msg.payload = 'MessageId not returned';
+      out(msg);
     }
   })
   .catch((error) => {
-    out({'payload': 'MessageId not returned'})
+    msg.payload = 'MessageId not returned';
+    msg.firebaseError = error;
+    out(msg);
   });
 };
 
