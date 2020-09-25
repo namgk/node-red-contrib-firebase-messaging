@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-firebase-messaging",
-  "version": "0.3.7",
+  "version": "1.0.0",
   "description": "Communicate with google firebase realtime database. These nodes use the new firebase-admin API and service account json is used for authentication.",
   "scripts": {
     "test": "mocha"
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/namgk/node-red-contrib-firebase-messaging#readme",
   "dependencies": {
-    "firebase-admin": "^8.9.2"
+    "firebase-admin": "^9.2.0"
   },
   "node-red": {
     "nodes": {

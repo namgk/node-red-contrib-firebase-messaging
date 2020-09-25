@@ -23,7 +23,7 @@ FirebaseAdminNode.prototype.onClose = function(removed, done) {
  		done()
  	})
  	.catch((e)=>{
-  	console.log(e)
+  	console.error(e)
  		done()
  });
 };
