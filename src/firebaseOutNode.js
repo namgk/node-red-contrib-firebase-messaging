@@ -34,16 +34,10 @@ FirebaseOutNode.prototype.onInput = function(msg, out) {
 
   this.messaging.send(message)
   .then((response) => {
-    if (response.includes("/messages/")){
-      out(msg);
-    } else {
-      msg.payload = 'MessageId not returned';
-      msg.firebaseResponse = response;
-      out(msg);
-    }
+    msg.firebaseResponse = response;
+    out(msg);
   })
-  .catch(error => {
-    msg.payload = 'MessageId not returned';
+  .catch((error) => {
     msg.firebaseError = error;
     out(msg);
   });
