@@ -19,3 +19,24 @@ Then do
 
     npm run test
 
+## Push notification for single device
+
+If you want to send a message to a single device, you should configure the node to be of type "Data" and inject to the node the following msg format:
+
+```json
+{
+   "payload": "<any object data>",
+   "token": "<fcm token>"
+}
+```
+
+## Push notification for all devices
+
+Send the following payload:
+
+```json
+{
+  "title": "<notification title>",
+  "body": "<body>"
+}
+```
