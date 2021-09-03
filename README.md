@@ -32,7 +32,7 @@ If you want to send a message to a single device, you should configure the node 
 
 ## Push notification for all devices
 
-Send the following payload:
+Configure the node to be of type "Data" and send the following payload:
 
 ```json
 {
